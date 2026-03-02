@@ -1,4 +1,15 @@
 (() => {
+	// Default-Zielwerte je Item-Name (keine Normierung nötig)
+  	const DEFAULT_TARGETS = {
+    	"CCSA Forschung": 30,
+    	"CE Forschung": 5,
+    	"GS Forschung": 15,
+    	"UMI Forschung": 10,
+    	"Eigene Qualifizierung": 15,
+	  	"Referenzmaterialien": 10,
+	  	"GS Gremien": 5
+  	};
+	
   const SELECTORS = {
     timeInputs:
       'input.sapMInputBaseInner:not(.sapMComboBoxInner)[id*="clone"][id*="input"]',
@@ -168,6 +179,16 @@
     const tbody = document.createElement('tbody');
 
     items.forEach((it, i) => {
+		
+		// Fill from DEFAULT_Targets if specified at top and item is present
+		let defaultValue = "";
+		if (DEFAULT_TARGETS && typeof DEFAULT_TARGETS === "object") {
+  			const key = String(it.text).trim();
+  			if (DEFAULT_TARGETS.hasOwnProperty(key)) {
+    			defaultValue = String(DEFAULT_TARGETS[key]).replace(".", ",");
+  			}	
+		}
+		
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td style="padding:8px; border-bottom:1px solid #eee;">${i + 1}</td>
