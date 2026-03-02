@@ -23,7 +23,7 @@
     btn.textContent = "Projektzeit verteilen";
     btn.style.cssText = `
       position: fixed;
-      bottom: 20px;
+      bottom: 80px;
       right: 20px;
       z-index: 999999;
       background: #0b74de;
@@ -54,4 +54,5 @@
   window.addEventListener("load", () => {
     setTimeout(addButton, 1500); // UI5 braucht manchmal 1–2 sec bis DOM vollständig
   });
+
 })();
