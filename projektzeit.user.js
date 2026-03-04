@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Projektzeit Verteilung (SAP UI5)
 // @namespace    https://github.com/janlisec/
-// @version      1.0
+// @version      1.1
 // @description  Verteilt Zeitwerte in SAP Fiori Oberflächen anhand gewichtetem Algorithmus
 // @match        https://*/sap/bc/*
 // @grant        none
@@ -56,3 +56,4 @@
   });
 
 })();
+
