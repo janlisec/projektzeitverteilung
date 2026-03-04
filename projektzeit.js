@@ -3,7 +3,7 @@
   	const DEFAULT_TARGETS = {
     	"CCSA Forschung": 30,
     	"CE Forschung": 5,
-    	"GS Forschung": 15,
+    	"GS Forschung": 25,
     	"UMI Forschung": 10,
     	"Eigene Qualifizierung": 15,
 	  	"Referenzmaterialien": 10,
@@ -196,7 +196,8 @@
         <td style="padding:8px; border-bottom:1px solid #eee;">
           <input type="text" data-idx="${i}" inputmode="decimal"
                  style="width:120px; padding:6px 8px; border:1px solid #ccc; border-radius:4px"
-                 placeholder="z. B. 1">
+                 placeholder="z.B. 1"
+				 value="${defaultValue}">
         </td>
         <td style="padding:8px; border-bottom:1px solid #eee;">
           <span class="dist-cell" data-idx="${i}" style="display:inline-block; min-width:90px;">–</span>
@@ -324,9 +325,6 @@
       resolve(norm); // Rückgabe bleibt: normierte Zielgewichte
     });
 
-    // Initial: Zielwerte alle 1, direkt beide Verteilungen berechnen
-    inputs.forEach(inp => { inp.value = '1'; });
-    recomputeDistributions();
   });
 };
 
@@ -408,7 +406,7 @@
     return { aborted: false, filled, skipped, errors };
   };
 
-  const selectBoxesByAssignment = (assignment, items) => {
+  const selectBoxesByAssignment = (assignment, items, times) => {
     const inners = collect(SELECTORS.comboBoxInners);
     if (inners.length === 0 || items.length === 0) {
       return { selected: 0, skipped: inners.length, errors: 0 };
@@ -420,6 +418,12 @@
     let selected = 0, skipped = 0, errors = 0;
 
     for (let row = 0; row < rowsIdx.length; row++) {
+		
+	if (times[row] === 0) {
+		skipped++;
+		continue;
+	}
+
       const idx = rowsIdx[row];
       const innerEl = mapInners.get(idx);
       if (!innerEl) { skipped++; continue; }
@@ -492,7 +496,7 @@
 
     const resTimes = fillTimes();
 
-    const resBoxes = selectBoxesByAssignment(dist.assignment, itemsSample);
+    const resBoxes = selectBoxesByAssignment(dist.assignment, itemsSample, times);
 
     alert(
       `${resTimes.aborted ? 'Zeiten: abgebrochen' :
