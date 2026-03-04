@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Projektzeit-Verteilung Optimierer
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Automatisches Auslesen, Verteilen und Befüllen von Zeitwerten und Comboboxen in SAP UI5 basierten Projektzeit-Formularen
 // @author       Jan Lisec
 // @match        *://*/*
